@@ -1,0 +1,63 @@
+## YAML Template.
+---
+
+name: Cross-Platform Jobs Workflow1
+
+# Trigger the workflow on pull requests to main
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+
+  ubuntu-job:
+    name: Ubuntu Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Show OS Info
+        run: |
+          echo "Operating System Information:"
+          uname -a
+
+      - name: Create and Display File
+        run: |
+          echo "This is Ubuntu!" > ubuntu.txt
+          cat ubuntu.txt
+
+  windows-job:
+    name: Windows Job
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Show OS Info
+        run: |
+          echo "Operating System Information:"
+          systeminfo
+
+      - name: Create and Display File
+        run: |
+          echo This is Windows! > windows.txt
+          type windows.txt
+
+  macos-job:
+    name: macOS Job
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Show OS Info
+        run: |
+          echo "Operating System Information:"
+          uname -a
+
+      - name: Create and Display File
+        run: |
+          echo "This is macOS!" > macos.txt
+          cat macos.txt
