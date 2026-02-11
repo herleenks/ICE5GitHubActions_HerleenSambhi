@@ -10,7 +10,7 @@ on:
     types: [created]
     
   push:
-    branches: main
+    branches: master
 
 jobs:
   build:
