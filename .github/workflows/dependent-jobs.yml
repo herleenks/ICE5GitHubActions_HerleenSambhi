@@ -1,0 +1,52 @@
+## YAML Template.
+---
+
+name: Dependent Jobs Workflow
+
+# Trigger on push to the main branch
+on:
+  workflow_dispatch: # Putting here is also fine!!
+  release:
+    types: [created]
+    
+  push:
+    branches: main
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare the build 
+        run: echo "Preparing to build..."
+
+      - name: Start Build
+        run: |
+          echo "Building application..."
+          sleep 5   
+          
+  test:
+    name: Test Application
+    runs-on: ubuntu-latest
+    needs: build   # depends on build
+    steps:
+      - name: Prepare the tese
+        run: echo "Preparing to test..."
+
+      - name: Run Tests
+        run: |
+          echo "Running tests..."
+          sleep 3   
+
+  deploy:
+    name: Deploy Application
+    runs-on: ubuntu-latest
+    needs: test  
+    steps:
+      - name: Prepare to Deploy
+        run: echo "Preparing to deploy..."
+
+      - name: Deploy Application
+        run: |
+          echo "Deploying application..."
+          sleep 2   
